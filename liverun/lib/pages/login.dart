@@ -2,52 +2,15 @@ library loginLib;
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../functions/auth.dart';
 
 class MyLogin extends StatelessWidget {
+  final authService auth;
+
+  MyLogin({super.key, required this.auth});
+
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passWordController = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  Future<void> logIn(BuildContext context) async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: userNameController.text,
-        password: passWordController.text,
-      );
-      // Navigate to main page on successful login
-      Navigator.pushReplacementNamed(context, '/main');
-    } catch (e) {
-      // Handle login error
-      print("Failed to log in: $e");
-      // Show error message to the user
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Failed to log in. Please check your credentials."),
-        ),
-      );
-    }
-  }
-
-  Future<void> signUp(BuildContext context) async {
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: userNameController.text,
-        password: passWordController.text,
-      );
-      // Navigate to main page on successful sign-up
-      Navigator.pushReplacementNamed(context, '/');
-    } catch (e) {
-      // Handle sign-up error
-      print("Failed to sign up: $e");
-      // Show error message to the user
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Failed to sign up. Please try again."),
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +47,7 @@ class MyLogin extends StatelessWidget {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () => logIn(context),
+                onPressed: () => auth.logIn(context, userNameController.text, passWordController.text),
                 child: Text("Log in"),
               ),
               Text(
@@ -95,7 +58,7 @@ class MyLogin extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () => signUp(context),
+                onPressed: () => auth.signUp(context, userNameController.text, passWordController.text),
                 child: Text("Sign up"),
               ),
             ],
