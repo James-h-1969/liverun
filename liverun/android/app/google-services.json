@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35967732039",
+    "project_id": "liverun-574fd",
+    "storage_bucket": "liverun-574fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35967732039:android:24543d6bba8defd67da462",
+        "android_client_info": {
+          "package_name": "com.example.liverun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIJS_qF5LjI7411rg_2ikcfQG0zmIXQWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
