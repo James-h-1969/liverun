@@ -70,9 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await widget.auth.logout;
-        },
+        onPressed: () => widget.auth.logout(context),
         tooltip: 'Increment',
         child: const Icon(Icons.logout),
       ), // This trailing comma makes auto-formatting nicer for build methods.

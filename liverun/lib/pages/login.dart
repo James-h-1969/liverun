@@ -33,7 +33,7 @@ class MyLogin extends StatelessWidget {
                 controller: userNameController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: 'Username',
+                  hintText: 'Email',
                 ),
               ),
               SizedBox(height: 20),
@@ -49,7 +49,11 @@ class MyLogin extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => auth.logIn(context, userNameController.text, passWordController.text),
                 child: Text("Log in"),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 20, horizontal: 90)),
+                ),
               ),
+              SizedBox(height: 20),
               Text(
                 "No account?",
                 style: TextStyle(
@@ -57,6 +61,7 @@ class MyLogin extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => auth.signUp(context, userNameController.text, passWordController.text),
                 child: Text("Sign up"),

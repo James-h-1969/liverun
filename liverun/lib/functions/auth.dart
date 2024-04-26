@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class authService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> logIn(BuildContext context, String email_, String password_) async {
     try {
@@ -29,9 +31,21 @@ class authService {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
-        email: email_,
-        password: password_,
+            email: email_,
+            password: password_,
       );
+
+      DateTime _now = DateTime.now(); // get the current datetime
+      
+      Map<String, dynamic> userInitialData = {
+        'email': email_,
+        'name': "", //leave empty to fill in later
+        'creation_time': _now,
+        'friends':[],
+      };
+      await _firestore.collection('users').add(userInitialData); // add to firestore
+      print('Data added successfully');
+
     } catch (e) {
       // Handle sign-up error
       print("Failed to sign up: $e");
